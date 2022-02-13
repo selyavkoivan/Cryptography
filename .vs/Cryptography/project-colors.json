@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e0edca6b-59d8-49b1-84c9-8560748fd085": {
+      "ProjectGuid": "e0edca6b-59d8-49b1-84c9-8560748fd085",
+      "DisplayName": "Cryptography",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

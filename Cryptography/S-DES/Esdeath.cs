@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
+using System.Text;   //1111110000100000
 using System.Threading;
 using Cryptography.Crypto;
 
 
 namespace Cryptography.S_DES
 {
-    public class Esdeath : IEncryptor
+    public class Esdeath : ICrypto
     {
         private static readonly int[] P10 = { 3, 5, 2, 7, 4, 10, 1, 9, 8, 6 };
         private static readonly int[] P8 = { 6, 3, 7, 4, 8, 5, 10, 9 };
@@ -17,7 +17,6 @@ namespace Cryptography.S_DES
         private static readonly int[] IP = { 2, 6, 3, 1, 4, 8, 5, 7 };
         private static readonly int[] IP_1 = { 4, 1, 3, 5, 7, 2, 8, 6 };
         private static readonly int[] EP = { 4, 1, 2, 3, 2, 3, 4, 1 };
-
         private static readonly int[,] SBlock1 =
         {
             { 1, 0, 3, 2 },
@@ -25,7 +24,6 @@ namespace Cryptography.S_DES
             { 0, 2, 1, 3 },
             { 3, 1, 3, 2 }
         };
-
         private static readonly int[,] SBlock2 =
         {
             { 0, 1, 2, 3 },
@@ -71,7 +69,6 @@ namespace Cryptography.S_DES
                 var IP_1 = GenerateIP_1(secondRound);
                 encryptBits.AddRange(IP_1);
             }
-
             return encryptBits.ToArray();
         }
 

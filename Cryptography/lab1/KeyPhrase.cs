@@ -6,7 +6,7 @@ using Cryptography.Crypto;
 
 namespace Cryptography.lab1
 {
-    public class KeyPhrase : IEncryptor
+    public class KeyPhrase : ICrypto
     {
         private const string alphabet = "abcdefghijklmnopqrstuvwxyzабвгдеёжзийклмнопрстуфхцчшщъыьэюя ";
         private readonly string keyword;

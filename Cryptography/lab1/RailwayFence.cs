@@ -6,7 +6,7 @@ using Cryptography.Crypto;
 
 namespace Cryptography.lab1
 {
-    public class RailwayFence : IEncryptor
+    public class RailwayFence : ICrypto
     {
         private readonly int key;
         private readonly bool isVisible;
@@ -50,7 +50,6 @@ namespace Cryptography.lab1
             {
                 encodedMessage.Append(fenceString);
             }
-
             return encodedMessage.ToString();
         }
 
@@ -75,7 +74,6 @@ namespace Cryptography.lab1
                 fence[j].Append("x");
                 ControlLoopVariables(ref isRising, ref j);
             }
-
             if (isVisible) Print(fence);
         }
 
