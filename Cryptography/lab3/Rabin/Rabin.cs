@@ -17,8 +17,8 @@ namespace Cryptography.lab3.Rabin
 
         public Rabin()
         {
-            p = PrimeGenerator.GeneratePrimeBigInteger();
-            q = PrimeGenerator.GeneratePrimeBigInteger(p);
+            p = PrimeGenerator.GeneratePrimeModBigInteger();
+            q = PrimeGenerator.GeneratePrimeModBigInteger(p);
             n = p * q;
         }
 
@@ -70,11 +70,11 @@ namespace Cryptography.lab3.Rabin
             var mp = bytes.Select(b => Power(b, (p + 1) / 4, p)).ToArray();
             var mq = bytes.Select(b => Power(b, (q + 1) / 4, q)).ToArray();
             BigInteger x = 0, y = 0;
-            gcd(p, q, ref x, ref y);
+            EuclidSAlgorithm(p, q, ref x, ref y);
             var decryptMessage = new StringBuilder();
             for (int i = 0; i < mp.Length; i++)
             {
-                decryptMessage.Append(EachLetter(x, y, mp[i], mq[i]));
+                decryptMessage.Append(GetLetter(x, y, mp[i], mq[i]));
             }
 
             return decryptMessage.ToString();
@@ -82,7 +82,7 @@ namespace Cryptography.lab3.Rabin
 
 
         //евклид
-        void gcd(BigInteger a, BigInteger b, ref BigInteger x, ref BigInteger y)
+        protected virtual BigInteger EuclidSAlgorithm(BigInteger a, BigInteger b, ref BigInteger x, ref BigInteger y)
         {
             var d0 = a;
             var d1 = b;
@@ -103,6 +103,7 @@ namespace Cryptography.lab3.Rabin
 
             x = x1;
             y = y1;
+            return d1;
         }
 
         public BigInteger Power(BigInteger a, BigInteger z, BigInteger n)
@@ -110,6 +111,7 @@ namespace Cryptography.lab3.Rabin
             BigInteger a1 = a;
             var z1 = z;
             BigInteger x = 1;
+            int i = 0;
             while (z1 != 0)
             {
                 while (z1 % 2 == 0)
@@ -118,6 +120,7 @@ namespace Cryptography.lab3.Rabin
                     a1 = (a1 * a1) % n;
                 }
 
+                i++;
                 z1 = z1 - 1;
                 x = (x * a1) % n;
             }
@@ -125,9 +128,9 @@ namespace Cryptography.lab3.Rabin
             return x;
         }
 
-        private char EachLetter(BigInteger yp, BigInteger yq, BigInteger mp, BigInteger mq)
+        private char GetLetter(BigInteger yp, BigInteger yq, BigInteger mp, BigInteger mq)
         {
-            var ms = new BigInteger[4];
+            var ms = new BigInteger[4]; 
             ms[0] = (yp * p * mq + yq * q * mp) % n;
             ms[1] = n - ms[0];
             ms[2] = (yp * p * mq - yq * q * mp) % n;
@@ -135,6 +138,7 @@ namespace Cryptography.lab3.Rabin
             char letter = default;
             foreach (var m in ms)
             {
+              
                 try
                 {
                     letter = (char)m;
