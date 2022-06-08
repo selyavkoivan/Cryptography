@@ -45,9 +45,9 @@ namespace Cryptography.DigitalSignature
         {
             var d = new BigInteger();
             var x = new BigInteger();
-
+            
             EuclidSAlgorithm(phi, e, ref x, ref d);
-
+            Console.WriteLine(e*d % phi);
             return d;
         }
 
@@ -60,8 +60,8 @@ namespace Cryptography.DigitalSignature
         public bool CheckDigitalSignature(string text, BigInteger digitalSignature)
         {
             var hash = new Hashpjw().GetUHashCode(text);
-            var signature = Power(digitalSignature, e, r);
-            return hash == signature;
+            var signatureHash = Power(digitalSignature, e, r);
+            return hash == signatureHash;
         }
     }
 }

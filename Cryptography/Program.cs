@@ -82,25 +82,25 @@ namespace Cryptography
                         {
                             var crypto = new LSB();
                             var bytes = crypto.Encrypt(ReadFile("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\source.txt"),
-                                ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\ева.tif"));
-                            WritePicture(bytes, "X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\ева02.tif");
+                                ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\изображение124.tif"));
+                            WritePicture(bytes, "X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\изображениеLSB.tif");
                             Console.WriteLine("Текст из картинки :\n" +
-                                crypto.Decrypt(ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\ева02.tif")));
+                                crypto.Decrypt(ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\изображениеLSB.tif")));
                             break;
                         }
                         case 8:
                         {
                             // звук.wav
                             var crypto = new Patchwork();
-                            crypto.RandomKey();
-                            var bytes = ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\изображение.tif");
-                            var originalBytes = ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\изображение.tif");
+                            
+                            var bytes = ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\звук.wav");
+                            var originalBytes = ReadPicture("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\звук.wav");
                       
                             crypto.SetWaterMark(bytes, 12);
 
 
                             Console.WriteLine(crypto.CheckPictureHasWaterMark(originalBytes, bytes, 12));
-                            WritePicture(bytes, "X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\изображение123.tif");
+                            WritePicture(bytes, "X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\patchwork.wav");
                           
                             Console.WriteLine(crypto.CheckPictureHasWaterMark(originalBytes, originalBytes, 12));
                             break;
@@ -203,7 +203,7 @@ namespace Cryptography
 
         private static void TestFileDigitalSignature(RSADigitalSignature digitalSignature)
         {
-            var text = ReadFile("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\source.txt");
+            var text = /*ReadFile("X:\\bsuir\\сем 6\\КИОКИ\\Cryptography\\source.txt")*/ "bsuirr";
             Console.WriteLine($"Исходный текст :\n{text}");
             var signature = digitalSignature.GetDigitalSignature(text);
             Console.WriteLine($"Цифровая подпись :\n{signature}\n****** ПРОВЕРКА");

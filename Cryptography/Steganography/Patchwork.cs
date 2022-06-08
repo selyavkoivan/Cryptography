@@ -14,11 +14,7 @@ namespace Cryptography.Steganography
         private const int N = 20000;
         private const byte Q = 4;
         
-        public int RandomKey()
-        {
-          
-            return 2;
-        }
+       
         public void SetWaterMark(byte[] sound, int key)
         {
             var rnd = new Random(key);
@@ -50,7 +46,7 @@ namespace Cryptography.Steganography
                 var b =rnd.Next(100, bytes.Length - 1);
                 sumOfDifferences += (bytes[a] - bytes[b]);
             }
-            return sumOfDifferences < 0 ? -1 * sumOfDifferences : sumOfDifferences;
+            return sumOfDifferences;
         }
 
       

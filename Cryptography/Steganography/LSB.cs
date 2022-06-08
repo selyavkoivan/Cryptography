@@ -13,8 +13,7 @@ namespace Cryptography.Steganography
             Array.ForEach(text.ToCharArray(), letter => bitsBuilder.Append(GetBits(letter)));
             bitsBuilder.Append("0000000000000000");
             var bits = bitsBuilder.ToString();
-
-            for (int i = image.Length - 1, j = 0; j < bitsBuilder.Length; i--, j+=2)
+            for (int i = 1000, j = 0; j < bitsBuilder.Length; i++, j+=2)
             {
                 image[i] = ChangeBits(image[i], bits.Substring(j, 2));
             }
@@ -46,7 +45,7 @@ namespace Cryptography.Steganography
         public string Decrypt(byte[] readPicture)
         {
             var message = new StringBuilder();
-            for (int i = readPicture.Length - 1; i > 0; i--)
+            for (int i = 1000; i < readPicture.Length; i++)
             {
                 message.Append(GetBits(readPicture[i]));
             }
